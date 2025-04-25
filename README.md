@@ -38,13 +38,25 @@ Os dados ficam armazenados em seu projeto no arquivo **cadastro.db** que é cria
 
 Você pode visualizar com o plugin do vscode sqlite view
 
-Use o postman para fazer os testes iniciais. UrlBase: http://localhost:3000 
+UrlBase: http://localhost:3000 
 
-### Bom Jornada ;) 
+#### Para ter melhor acesso aos testes:
+
+1. Copie a URL: [https://raw.githubusercontent.com/usuario/repositorio/main/postman_collection.json](https://raw.githubusercontent.com/liviavbarbosa/server-gms/refs/heads/main/postman/Golden%20Movie%20Studio.postman_collection.json)
+2. Abra o Postman.
+3. Clique em "Import" (canto superior esquerdo).
+4. Cole o link.
+5. Clique em "Continue".
+
+O Postman vai identificar como uma coleção.
+
+### Autores 
 Fábio & José Ernesto
 
 Qualidade de software
 Apoio: Leonardo Souza e Aline Keiko
+
+**OBS.:** Alterado para versão atual por [Lívia Barbosa](https://github.com/liviavbarbosa)
 
 
 
