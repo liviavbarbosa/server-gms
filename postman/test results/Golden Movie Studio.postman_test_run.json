@@ -1,0 +1,508 @@
+{
+	"id": "201c2f75-46ba-4867-9e4d-e75c9046b0d7",
+	"name": "Golden Movie Studio",
+	"timestamp": "2025-04-25T16:57:18.444Z",
+	"collection_id": "44430224-8006d285-7070-47b4-93cc-db0764d5b21d",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 31,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2025-04-25T16:57:17.926Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "f86e998f-3ccd-4c31-b432-c7668f53ec34",
+			"name": "Busca de filmes com palavra-chave válida",
+			"url": "http://localhost:3000/busca/A%20Era%20do%20Gelo%203",
+			"time": 10,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code deve ser 200": true,
+				"Deve validar as propriedades titulo, descricao, ano e diretor em todos os filmes cadastrados": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar as propriedades titulo, descricao, ano e diretor em todos os filmes cadastrados": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				10
+			],
+			"allTests": [
+				{
+					"Status code deve ser 200": true,
+					"Deve validar as propriedades titulo, descricao, ano e diretor em todos os filmes cadastrados": true
+				}
+			]
+		},
+		{
+			"id": "101febce-cca3-40e3-9cad-958d0224f206",
+			"name": "Busca de filmes sem palavra-chave",
+			"url": "http://localhost:3000/busca/ ",
+			"time": 6,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code deve ser 200": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				6
+			],
+			"allTests": [
+				{
+					"Status code deve ser 200": true
+				}
+			]
+		},
+		{
+			"id": "2b45ce9a-dc03-43e3-9497-f92498a897d4",
+			"name": "Busca de filmes com palavra-chave inexistente",
+			"url": "http://localhost:3000/busca/Matrix",
+			"time": 5,
+			"responseCode": {
+				"code": 404,
+				"name": "Not Found"
+			},
+			"tests": {
+				"Status code deve ser 404": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 404": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				5
+			],
+			"allTests": [
+				{
+					"Status code deve ser 404": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "7d38e15d-37ec-41c2-b6a4-e858fe86c869",
+			"name": "Cadastro de filme com sucesso",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 15,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code deve ser 200": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 200": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				15
+			],
+			"allTests": [
+				{
+					"Status code deve ser 200": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "e9260d1d-34e0-444b-9f3e-dae31f5366dc",
+			"name": "Cadastro de filme com título vazio",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "021cccfb-0cec-4230-8ece-be6d5cab43fc",
+			"name": "Cadastro de filme com título inválido",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 3,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "9cf993e3-d3b5-4f1a-aa2e-fa27a470fade",
+			"name": "Cadastro de filme com descrição vazia",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "a8e5e480-350c-483a-8edd-41756449f1b9",
+			"name": "Cadastro de filme com descrição inválida",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "fe9a3bc2-38c9-4f7d-9da2-a5f718ffdc33",
+			"name": "Cadastro de filme com ano vazio",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 4,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				4
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true
+				}
+			]
+		},
+		{
+			"id": "8c3ea605-a1b4-4b65-8b6d-9f24f1107125",
+			"name": "Cadastro de filme com ano inválido",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 3,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true
+				}
+			]
+		},
+		{
+			"id": "e70430d5-6ec9-44fe-9cc2-106c89cec9ca",
+			"name": "Cadastro de filme com diretor vazio",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 3,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		},
+		{
+			"id": "d8a8d845-2ef8-44d8-bf27-9fedbcc0a2d8",
+			"name": "Cadastro de filme com diretor inválido",
+			"url": "http://localhost:3000/cadastro/filmes",
+			"time": 3,
+			"responseCode": {
+				"code": 400,
+				"name": "Bad Request"
+			},
+			"tests": {
+				"Status code deve ser 400": true,
+				"Deve validar a propriedade message": true,
+				"Deve validar a mensagem de retorno": true
+			},
+			"testPassFailCounts": {
+				"Status code deve ser 400": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a propriedade message": {
+					"pass": 1,
+					"fail": 0
+				},
+				"Deve validar a mensagem de retorno": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				3
+			],
+			"allTests": [
+				{
+					"Status code deve ser 400": true,
+					"Deve validar a propriedade message": true,
+					"Deve validar a mensagem de retorno": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 64,
+	"collection": {
+		"requests": [
+			{
+				"id": "f86e998f-3ccd-4c31-b432-c7668f53ec34",
+				"method": "GET"
+			},
+			{
+				"id": "101febce-cca3-40e3-9cad-958d0224f206",
+				"method": "GET"
+			},
+			{
+				"id": "2b45ce9a-dc03-43e3-9497-f92498a897d4",
+				"method": "GET"
+			},
+			{
+				"id": "7d38e15d-37ec-41c2-b6a4-e858fe86c869",
+				"method": "POST"
+			},
+			{
+				"id": "e9260d1d-34e0-444b-9f3e-dae31f5366dc",
+				"method": "POST"
+			},
+			{
+				"id": "021cccfb-0cec-4230-8ece-be6d5cab43fc",
+				"method": "POST"
+			},
+			{
+				"id": "9cf993e3-d3b5-4f1a-aa2e-fa27a470fade",
+				"method": "POST"
+			},
+			{
+				"id": "a8e5e480-350c-483a-8edd-41756449f1b9",
+				"method": "POST"
+			},
+			{
+				"id": "fe9a3bc2-38c9-4f7d-9da2-a5f718ffdc33",
+				"method": "POST"
+			},
+			{
+				"id": "8c3ea605-a1b4-4b65-8b6d-9f24f1107125",
+				"method": "POST"
+			},
+			{
+				"id": "e70430d5-6ec9-44fe-9cc2-106c89cec9ca",
+				"method": "POST"
+			},
+			{
+				"id": "d8a8d845-2ef8-44d8-bf27-9fedbcc0a2d8",
+				"method": "POST"
+			}
+		]
+	}
+}

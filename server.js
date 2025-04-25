@@ -36,6 +36,16 @@ db.run(`
     )
 `);
 
+db.run(`
+    CREATE TABLE IF NOT EXISTS filmes (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        titulo TEXT NOT NULL,
+        descricao TEXT NOT NULL,
+        ano INTEGER NOT NULL,
+        diretor TEXT NOT NULL
+    )
+`);
+
 const schemaCadastro = Joi.object({
     nome: Joi.string().pattern(new RegExp('^[A-Za-zÀ-ÖØ-öø-ÿ\\s]+$')).required().messages({
         'string.base': `Nome deve ser uma string`,
@@ -56,6 +66,25 @@ const schemaCadastro = Joi.object({
     }),
     senha: Joi.string().pattern(new RegExp('^(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9]).{8,}$')).required().messages({
         'string.pattern.base': `Senha deve ter pelo menos 8 caracteres, incluir uma letra maiúscula, um número e um caractere especial (!@#$&*)`
+    })
+});
+
+const schemaFilme = Joi.object({
+    titulo: Joi.string().required().messages({
+        'string.base': `Título deve ser uma string`,
+        'string.empty': `Título não pode estar vazio`,
+    }),
+    descricao: Joi.string().required().messages({
+        'string.base': `Descrição deve ser uma string`,
+        'string.empty': `Descrição não pode estar vazio`,
+    }),
+    ano: Joi.number().integer().min(0).max(new Date().getFullYear()).strict().required().messages({
+        'integer.base': `Ano deve ser um número`,
+        'integer.empty': `Ano não pode estar vazio`,
+    }),
+    diretor: Joi.string().required().messages({
+        'string.base': `Diretor deve ser uma string`,
+        'string.empty': `Diretor não pode estar vazio`,
     })
 });
 
@@ -118,6 +147,41 @@ app.post('/cadastro', async (req, res) => {
         console.error(err);
         return res.status(400).json({ message: err.details[0].message });
     }
+});
+
+app.post('/cadastro/filmes', async (req, res) => {
+    try {
+        const value = await schemaFilme.validateAsync(req.body);
+        const { titulo, descricao, ano, diretor } = value;
+
+        db.run(`INSERT INTO filmes (titulo, descricao, ano, diretor) VALUES (?, ?, ?, ?)`,
+            [titulo, descricao, ano, diretor],
+            function(err) {
+                if (err) {
+                    console.error(err.message);
+                    return res.status(500).json({ message: 'Erro ao cadastrar o filme.' });
+                }
+                res.status(200).json({ message: 'Filme cadastrado com sucesso!', id: this.lastID });
+            }
+        );
+    } catch (err) {
+        return res.status(400).json({ message: err.details[0].message });
+    }
+});
+
+app.get('/busca/:titulo', (req, res) => {
+    const titulo = `%${req.params.titulo}%`;
+    db.all("SELECT id, titulo, descricao, ano, diretor FROM filmes WHERE titulo LIKE ? COLLATE NOCASE", [titulo], (err, rows) => {
+        if (err) {
+            console.error(err.message);
+            return res.status(500).json({ message: 'Erro ao buscar filmes.' });
+        }
+        if (rows && rows.length > 0) {
+            return res.status(200).json(rows);
+        } else {
+            return res.status(404).json({ message: 'Nenhum filme encontrado com esse título.' });
+        }
+    });
 });
 
 const swaggerOptions = {
@@ -332,13 +396,13 @@ app.listen(PORT, HOST, () => {
 
 /**
  * @swagger
- * /busca:
+ * /busca/{titulo}:
  *   get:
  *     tags: [Filmes]
  *     summary: Busca um filme
  *     description: Retorna uma lista de filmes baseada no termo de busca fornecido.
  *     parameters:
- *       - in: query
+ *       - in: path
  *         name: titulo
  *         required: true
  *         schema:
@@ -357,6 +421,33 @@ app.listen(PORT, HOST, () => {
  *         description: Filme não encontrado
  */
 
-
-
-
+/**
+ * @swagger
+ * /cadastro/filmes:
+ *   post:
+ *     tags: [Filmes]
+ *     summary: Registra um novo filme
+ *     description: Cria um novo filme no sistema com os dados fornecidos. 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             $ref: '#/components/schemas/Filme'
+ *           example:
+ *             titulo: "A Era do Gelo 3"
+ *             descricao: "Depois que Sid rouba alguns ovos de dinossauro, Manny, Diego e o resto de seus amigos pré-históricos entram em um mundo misterioso e subterrâneo para resgatar Sid."
+ *             ano: 2009
+ *             diretor: "Carlos Saldanha"
+ *     responses:
+ *       200:
+ *         description: Cadastro realizado com sucesso
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/Filme'
+ *       400:
+ *         description: Erro na validação dos dados
+ *       500:
+ *         description: Erro interno no servidor
+ */
